@@ -10,19 +10,23 @@ public class Runner
 {
     public static void main(String args[]) throws FileNotFoundException
     {
-        Board board2 = new Board("Hard3.txt");
-        System.out.println(board2);
-        for (int i = 0; i < 9; i++)
+        for (int puzzleNum = 1; puzzleNum <= 9; puzzleNum++)
         {
-            for (int j = 0; j < 9; j++)
+            Board board = new Board("puzzles/" + puzzleNum + ".txt");
+            System.out.println("Puzzle #" + puzzleNum + ": \n");
+            System.out.println(board);
+            for (int i = 0; i < 9; i++)
             {
-                board2.setPossibles(board2.board[i][j]);
+                for (int j = 0; j < 9; j++)
+                {
+                    board.setPossibles(board.board[i][j]);
+                }
             }
+            while(!board.solved())
+            {
+                board.setAll();
+            }
+            System.out.println(board + "\n");
         }
-        while(!board2.solved())
-        {
-            board2.setAll();
-        }
-        System.out.println(board2);
     }
 }
