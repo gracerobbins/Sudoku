@@ -1,9 +1,8 @@
 
 /**
- * Write a description of class Board2 here.
+ * Holds a 9x9 array of Square objects, which represents the Sudoku board.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Grace Robbins 
  */
 import java.util.Scanner;
 import java.io.File;
@@ -12,7 +11,12 @@ import java.util.*;
 public class Board
 {
     public Square[][] board;
-    public Board(String fileName) throws FileNotFoundException//creates a grid out of numbers from a file
+    
+    /**
+    *   Reads numbers from a puzzle file and created a grid of Square objects with those numbers. 
+    *   Zeros represent spaces that aren't filled in yet.
+    */
+    public Board(String fileName) throws FileNotFoundException
     {
         Scanner reader = new Scanner(new File(fileName));
         board = new Square[9][9];
@@ -26,6 +30,12 @@ public class Board
         }
     }
     
+    /**
+    *  Takes a Square sq. Find every other nonzero number in that row and column and remove it from sq's 
+    *  list of possible numbers.
+    *  For example, if another Square in that column is a 6, sq cannot possibly be a 6 as well. So 6 is removed
+    *  from sq's list of possibles. 
+    */
     public void setPossibles(Square sq)//narrows down the possible values that a specific square might have
     {
         //removes potential values for one square based on what else is in that row and column
@@ -45,7 +55,12 @@ public class Board
         //removes potential values for one square based on what else is in that nonet
         removeInNonet(sq);
     }
-    private void removeInNonet(Square sq)//removes potential values for one square based on what else is in that nonet
+    
+    /**
+    *  A nonet as set of 9 squares that a Sudoku board is divided into. Does the same thing as the above method but in a nonet
+    *  pattern, instead of a row and column pattern.
+    */
+    private void removeInNonet(Square sq)
     {
         int row = sq.getRow();
         int col = sq.getCol();
@@ -60,7 +75,15 @@ public class Board
             }
         }
     }
-    public void checkUniquesVertically(Square sq)//check to see if an individual square has a unique possible number
+    
+    /**
+    *  Sometimes narrowing Squares down to one value is impossible, so a different approach must be taken. Say, for example
+    *  a Square has the possible numbers 3, 4, and 8, and a Square in the same column has the possibles 4 and 8. Though neither
+    *  Square can be narrowed down to one possible number using the existing methods, we know that the first Square must be
+    *  a 3 because it's the only Square that can be a 3.
+    *  checkUniquesVertically checks for numerbers in sq's possibles list that aren't in any other Square in the column.
+    */
+    public void checkUniquesVertically(Square sq)
     {
         List<Integer> possUniques = new ArrayList<Integer>(sq.getPossiblesList());
         int squareRow = sq.getRow();
@@ -82,7 +105,11 @@ public class Board
             sq.setFinalNum(possUniques.get(0));
         }
     }
-    public void checkUniquesHorizontally(Square sq)//check to see if an individual square has a unique possible number
+    
+    /**
+    *  Does the same as checkUniquesVertically but in rows instead of columns.
+    */
+    public void checkUniquesHorizontally(Square sq)
     {
         List<Integer> possUniques = new ArrayList<Integer>(sq.getPossiblesList());
         int squareRow = sq.getRow();
@@ -104,7 +131,11 @@ public class Board
             sq.setFinalNum(possUniques.get(0));
         }
     }
-    public void checkUniquesNonet(Square sq)//check to see if an individual square has a unique possible number
+    
+    /**
+    *  Does the same as checkUniquesVertically but in nonets instead of columns.
+    */
+    public void checkUniquesNonet(Square sq)
     {
         List<Integer> possUniques = new ArrayList<Integer>(sq.getPossiblesList());
         int squareRow = sq.getRow();
@@ -131,6 +162,10 @@ public class Board
             sq.setFinalNum(possUniques.get(0));
         }
     }
+    
+    /**
+    *  Goes through each Square in the board and uses all of the above methods to narrow down it's possibleNums list
+    */
     public void setAll()//uses setPossibles, which sets one square, for every square in the grid
     {
         for (int i = 0; i < 9; i++)
@@ -180,7 +215,11 @@ public class Board
         return str;
     }
     
-    public boolean solved()//returns whether or not the whole board has been filled
+    
+    /**
+    *  returns true if the whole board has been filled
+    */
+    public boolean solved()
     {
         for (int i = 0; i < 9; i++)
         {
