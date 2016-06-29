@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=row\ col\ num
+comment0.target=Square(int,\ int,\ int)
+comment1.params=
+comment1.target=int\ getRow()
+comment2.params=
+comment2.target=int\ getCol()
+comment3.params=
+comment3.target=int\ getFinalNum()
+comment4.params=
+comment4.target=java.util.List\ getPossiblesList()
+comment5.params=num
+comment5.target=boolean\ has(int)
+comment6.params=num
+comment6.target=void\ setFinalNum(int)
+comment7.params=num
+comment7.target=void\ removePossNum(int)
+comment8.params=
+comment8.target=java.lang.String\ getPossNums()
+comment9.params=
+comment9.target=int\ possNumsLength()
+numComments=10

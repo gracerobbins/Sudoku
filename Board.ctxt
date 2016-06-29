@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=fileName
+comment0.target=Board(java.lang.String)
+comment1.params=sq
+comment1.target=void\ setPossibles(Square)
+comment2.params=sq
+comment2.target=void\ removeInNonet(Square)
+comment3.params=sq
+comment3.target=void\ checkUniquesVertically(Square)
+comment4.params=sq
+comment4.target=void\ checkUniquesHorizontally(Square)
+comment5.params=sq
+comment5.target=void\ checkUniquesNonet(Square)
+comment6.params=
+comment6.target=void\ setAll()
+comment7.params=
+comment7.target=java.lang.String\ toString()
+comment8.params=
+comment8.target=java.lang.String\ deBugToString()
+comment9.params=
+comment9.target=boolean\ solved()
+numComments=10
